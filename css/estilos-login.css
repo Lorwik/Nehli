@@ -1,0 +1,51 @@
+body{
+	background: url(../img/fondologin.jpg);
+	font-family: 'sans-serif', sans-serif;
+	color: #FFFFFF;
+}
+
+.logo{
+	width: 250px;
+}
+
+.txtlogin {
+    border: 1px solid #FFFFFF;
+    height: 30px;
+    width: 316px;
+    background: #1C1C1C;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.btnlogin{
+    border: 1px solid #e40813;
+    height: 34px;
+    width: 316px;
+    background: #e40813;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.frmlogin{
+    padding-top: 50px;
+}
+
+.loginregistro{
+    background: #000000;
+    width: 320px;
+    height: 659px;
+    text-align: left;
+    opacity: 85%;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 30px;
+}
+
+.tile a { color: red; }
+.tile a:hover {
+    text-decoration: none;
+    color: white;
+}
+.tile a:link { text-decoration: none;}
+.tile a:visited {text-decoration: none;}
+.tile a:active {text-decoration: none;}

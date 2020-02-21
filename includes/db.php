@@ -12,7 +12,7 @@ class DB{
         $this->db       = 'nehli';
         $this->user     = 'root';
         $this->password = "fantasia";
-        $this->charset  = 'utf-8';
+        $this->charset  = 'utf8mb4';
     }
 
     function connect(){

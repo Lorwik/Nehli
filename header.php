@@ -4,8 +4,8 @@
 	<link rel="shortcut icon" href="nhicon.ico"/>
 	
 	<?php
-		include('config.php'); //Incluimos el archivo de configuración que contiene todas las constantes
-		include('funciones.php'); //Incluimos el archivo con todas las funciones
+		include('includes/config.php'); //Incluimos el archivo de configuración que contiene todas las constantes
+		include('includes/funciones.php'); //Incluimos el archivo con todas las funciones
 		echo getBrowser(); //Comprobamos que el navegador que esta utilizando es compatible
 	?>
 

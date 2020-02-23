@@ -11,7 +11,7 @@
 	//Directorios de archivos multimedia
 	$video_dir="videos/Completados/";
 
-	$categoria=array("Series", "Peliculas", "Anime", "Peliculas Anime");
+	$categoria=array("Series", "Peliculas", "Anime", "Peliculas Animacion");
 
 	//Categorias
 	$music_dir1="musica/musica/";

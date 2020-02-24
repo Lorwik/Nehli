@@ -2,7 +2,6 @@
 include 'db.php';
 
 class User extends DB{
-    private $nombre;
     private $username;
 
     public function userExists($user, $pass){
@@ -18,11 +17,10 @@ class User extends DB{
     }
 
     public function setUser($user){
-        $query = $this->connect()->prepare("SELECT * FROM usuarios WHERE username = '$user'");
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
         $query->execute(['user' => $user]);
         
         foreach ($query as $currentUser) {
-            $this->nombre = $currentUser['nombre'];
             $this->usename = $currentUser['username'];
         }
     }
@@ -40,7 +38,7 @@ class User extends DB{
     }
 
     public function getNombre(){
-        return $this->nombre;
+        return $this->username;
     }
 }
 

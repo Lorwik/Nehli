@@ -27,6 +27,31 @@ class User extends DB{
         }
     }
 
+    //¿Existe el usuario?
+    public function ExisteUsuario($user){
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
+        $query->execute(['user' => $user]);
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //¿Existe email?
+    public function ExisteEmail($email){
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE email = :email');
+        $query->execute(['email' => $email]);
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Registramos un nuevo usuario
     public function createUser($user, $pass, $email){
         $md5pass = md5($pass);
         $query = $this->connect()->prepare("INSERT INTO usuarios (username, password, email) VALUES ('$user', '$md5pass', '$email')");

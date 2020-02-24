@@ -32,6 +32,7 @@ class DB{
             print_r('Error connection: ' . $e->getMessage());
         }   
     }
+    
 }
 
 ?>

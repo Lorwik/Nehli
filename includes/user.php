@@ -3,6 +3,7 @@ include 'db.php';
 
 class User extends DB{
     private $username;
+    private $email;
 
     public function userExists($user, $pass){
         $md5pass = md5($pass);
@@ -21,7 +22,8 @@ class User extends DB{
         $query->execute(['user' => $user]);
         
         foreach ($query as $currentUser) {
-            $this->usename = $currentUser['username'];
+            $this->username = $currentUser['username'];
+            $this->email = $currentUser['email'];
         }
     }
 
@@ -37,8 +39,12 @@ class User extends DB{
         }
     }
 
-    public function getNombre(){
+    public function getUserName(){
         return $this->username;
+    }
+
+    public function getEmail(){
+        return $this->email;
     }
 }
 

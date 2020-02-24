@@ -77,10 +77,15 @@ body {
 
 ul li {
     float:left; 
-    margin-top:20px ;
+    margin-top:20px;
     list-style: none;
     padding-right: 16px;
     padding-top: 10px;
+}
+
+#menu-superiorright{
+    float:right; 
+    margin-top: -10px;
 }
 
 /* Dando estilos a '<a>' del menu superior */
@@ -92,6 +97,13 @@ ul li {
 .menu-superior a:link { text-decoration: none;}
 .menu-superior a:visited {text-decoration: none;}
 .menu-superior a:active {text-decoration: none;}
+
+.avatar{
+    width:50px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
 
 p {
     width: 100%;

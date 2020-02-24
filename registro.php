@@ -32,17 +32,28 @@
 					$repassForm = $_POST['repassword'];
 					$emailForm = $_POST['email'];
 
+					//¿Se dejo algun campo vacio?
 					if (($userForm == "") || ($passForm == "") || ($emailForm == "")){
 						echo "¡Debes rellenar todos los campos!";
 					}else{
+						//¿Coinciden las contraseñas?
 						if ($passForm == $repassForm){
 							include("includes/user.php");
 							$user = new user();
-							if ($user->createUser($userForm, $passForm, $emailForm)){
-								header("refresh:3; url=index.php");
-								echo "¡Registro completado! Redireccionando en 3...";
+							//¿El usuario ya existe?
+							if ($user->ExisteUsuario($userForm) == false) {
+								if ($user->ExisteEmail($emailForm) == false) {
+									if ($user->createUser($userForm, $passForm, $emailForm)){
+										header("refresh:3; url=index.php");
+										echo "¡Registro completado! Redireccionando en 3...";
+									}else{
+										echo "Error al registrar la cuenta, intentalo mas tarde o ponte en contacto con un administrador.";
+									}
+								}else{
+									echo "Ya hay una cuenta con ese email registrado.";
+								}
 							}else{
-								echo "Error al registrar la cuenta, intentalo mas tarde o ponte en contacto con un administrador.";
+								echo "Ya hay un usuario registrado con ese nombre.";
 							}
 						}else{
 							echo "Las contraseñas no coinciden";

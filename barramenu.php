@@ -1,6 +1,8 @@
 <ul class="menu-superior">
 	<li><a href="home.php">Inicio</a></li>
 	<li><a href="youtube.php">YouTube</a></li>
+	<li><a href="https://filmaffinity.com" target="_blank">FilmAffinity</a></li>
+	<li><a href="https://myanimelist.net" target="_blank">MyAnimeList</a></li>
 </ul>
 
 <ul id="menu-superiorright" class="menu-superior">

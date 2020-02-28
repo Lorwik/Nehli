@@ -8,6 +8,10 @@
     if(isset($_SESSION['user'])){
         //Si hay sesion simplemente vamos a incluir este codigo en la pagina actual
         $user->setUser($userSession->getCurrentUser());
+        
+        if (basename($_SERVER['PHP_SELF']) == "index.php"){
+            header("refresh:0; url=home.php");
+        }
 
     }else if(isset($_POST['username']) && isset($_POST['password'])){
         

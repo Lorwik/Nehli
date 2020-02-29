@@ -8,6 +8,11 @@
 		include('includes/funciones.php'); //Incluimos el archivo con todas las funciones
 		include('index.php'); //Archivo de gestion de sesiones
 		echo getBrowser(); //Comprobamos que el navegador que esta utilizando es compatible
+
+		//¿Intenta acceder sin estar logeado?
+		if(isset($_SESSION['user']) == false){
+			header("refresh:0; url=index.php");
+		}
 	?>
 
 	<title><?php echo $titulo; ?></title>

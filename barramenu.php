@@ -6,7 +6,7 @@
 </ul>
 
 <ul id="menu-superiorright" class="menu-superior">
-	<li>Bienvenido <?php echo $user->getUserName(); ?></li>
+	<li>Bienvenido <?php echo $UserName; ?></li>
 	<li><a href="includes/logout.php">Cerrar sesión</a></li>
 	<li><img class="avatar" src="img/avatar.png"></li>
 </ul>

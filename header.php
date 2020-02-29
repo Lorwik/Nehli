@@ -13,6 +13,9 @@
 		if(isset($_SESSION['user']) == false){
 			header("refresh:0; url=index.php");
 		}
+
+		$UserName = $user->getUserName();
+		$controlparental = $user->userParental($UserName);
 	?>
 
 	<title><?php echo $titulo; ?></title>

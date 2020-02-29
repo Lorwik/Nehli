@@ -5,6 +5,7 @@ class User extends DB{
     private $username;
     private $email;
 
+    //Funcion que comprueba si el usuario existe
     public function userExists($user, $pass){
         $md5pass = md5($pass);
         $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND password = :pass');
@@ -17,8 +18,21 @@ class User extends DB{
         }
     }
 
+    //Funcion que comprueba si el usuario fue confirmado para poder logear
     public function userConfirmado($user){
         $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND confirmado = 1');
+        $query->execute(['user' => $user]);
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Funcion que comprueba si el usuario tiene activado el control parental
+    public function userParental($user){
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND parental = 1');
         $query->execute(['user' => $user]);
 
         if($query->rowCount()){
@@ -38,7 +52,7 @@ class User extends DB{
         }
     }
 
-    //¿Existe el usuario?
+    //Funcion que comprueba si existe el usuario solo con el nombre
     public function ExisteUsuario($user){
         $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
         $query->execute(['user' => $user]);

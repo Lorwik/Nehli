@@ -1,11 +1,12 @@
 <?php
-if (isset($_GET['dir'])){
-	$dir=$_GET['dir'];
-	$cat=$_GET['category'];
-	$id=$_GET['id'];
-} else {
-	header("location:index.php");
-}
+	//Si intenta entrar sin pasar la categoria y video, lo echamos
+	if (isset($_GET['dir'])){
+		$dir=$_GET['dir'];
+		$cat=$_GET['category'];
+		$id=$_GET['id'];
+	} else {
+		header("location:home.php");
+	}
 ?>
 
 <html>
@@ -15,6 +16,14 @@ if (isset($_GET['dir'])){
 		<link href="css/netflix-skin.css" rel="stylesheet" />
 		<!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
 		<script src="js/video.js"></script>
+
+		<?php
+			//Si esta intentando acceder directamente a una categoria protegida por control parental lo echamos
+			if ($cat == (sizeof($categoria)-1) && $controlparental == true){
+				echo "No tienes permisos para estar aquí.";
+				header("location:home.php");
+			}
+		?>
 	</head>
 	
 	<br/><br/><br/>

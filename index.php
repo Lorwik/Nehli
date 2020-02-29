@@ -24,10 +24,15 @@
         $user = new User();
         //¿Existe el usuario?
         if($user->userExists($userForm, $passForm)){
-            //echo "Existe el usuario";
-            $userSession->setCurrentUser($userForm);
-            $user->setUser($userForm);
-            header("refresh:0; url=home.php");
+            //¿La cuenta ha sido confirmada?
+            if ($user->userConfirmado($userForm)){
+                $userSession->setCurrentUser($userForm);
+                $user->setUser($userForm);
+                header("refresh:0; url=home.php");
+            }else{
+                $errorLogin = "La cuenta no ha sido confirmada, ponte en  contacto con un administrador para confirmar tu cuenta.";
+                include_once 'login.php';
+            }
         //Error
         }else{
             //echo "No existe el usuario";

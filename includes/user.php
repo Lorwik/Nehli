@@ -17,6 +17,17 @@ class User extends DB{
         }
     }
 
+    public function userConfirmado($user){
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND confirmado = 1');
+        $query->execute(['user' => $user]);
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function setUser($user){
         $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
         $query->execute(['user' => $user]);

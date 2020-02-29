@@ -5,7 +5,9 @@ Centro multimedia domestico inspirado en Netflix
 
 En el archivo config.php modificar el array $categoria con las categorias deseadas. Ejemplo:
 
-*$categoria=array("Series", "Peliculas", "Anime", "Peliculas Anime");*
+*$categoria=array("Series", "Peliculas", "Anime", "Peliculas Anime", "Adultos");*
+
+La categoria protegida por el control parental sera siempre el ultimo elemento del array
 
 Las miniaturas deberan estar en formato Jpg, si no se incluyen tomara una por defecto
 

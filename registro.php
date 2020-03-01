@@ -32,32 +32,53 @@
 					$repassForm = $_POST['repassword'];
 					$emailForm = $_POST['email'];
 
+					//Iniciamos la bandera error
+					$error = false;
+
 					//¿Se dejo algun campo vacio?
 					if (($userForm == "") || ($passForm == "") || ($emailForm == "")){
-						echo "¡Debes rellenar todos los campos!";
-					}else{
-						//¿Coinciden las contraseñas?
-						if ($passForm == $repassForm){
-							include("includes/user.php");
-							$user = new user();
-							//¿El usuario ya existe?
-							if ($user->ExisteUsuario($userForm) == false) {
-								if ($user->ExisteEmail($emailForm) == false) {
-									if ($user->createUser($userForm, $passForm, $emailForm)){
-										header("refresh:3; url=index.php");
-										echo "¡Registro completado! Redireccionando en 3...";
-									}else{
-										echo "Error al registrar la cuenta, intentalo mas tarde o ponte en contacto con un administrador.";
-									}
-								}else{
-									echo "Ya hay una cuenta con ese email registrado.";
-								}
-							}else{
-								echo "Ya hay un usuario registrado con ese nombre.";
-							}
+						$errormsg = "¡Debes rellenar todos los campos!";
+						$error = true;
+					}
+
+					//¿Coinciden las contraseñas?
+					if ($passForm <> $repassForm){
+						$errormsg = "Las contraseñas no coinciden";
+						$error = true;
+					}
+
+					//¿Las contraseñas cumplen un minimo de caracteres?
+					if ((strlen($passForm) < 6) || (strlen($passForm) > 20)){
+						$errormsg = "La contraseña debe tener entre 6 a 20 caracteres.";
+						$error = true;
+					}
+
+					include("includes/user.php");
+					$user = new user();
+					//¿El usuario ya existe?
+					if ($user->ExisteUsuario($userForm) == true){
+						$errormsg = "Ya hay un usuario registrado con ese nombre.";
+						$error = true;
+					}
+
+					//¿El usuario ya fue registrado?
+					if ($user->ExisteEmail($emailForm) == true){
+						$errormsg = "Ya hay una cuenta con ese email registrado.";
+						$error = true;
+					}
+
+					//¿Se produjo algun error?
+					if ($error == false){
+						//Si llegamos aqui, creamos el usuario
+						if ($user->createUser($userForm, $passForm, $emailForm)){
+							echo "¡Registro completado! Redireccionando en 3...";
+							header("refresh:3; url=index.php");
 						}else{
-							echo "Las contraseñas no coinciden";
+							echo "Error al registrar la cuenta, intentalo mas tarde o ponte en contacto con un administrador.";
 						}
+					}else{ //Si se produjeron, mostamos cuales fueron.
+						echo $errormsg;
+						$error = false;
 					}
 				}
 			?>

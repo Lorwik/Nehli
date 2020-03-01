@@ -14,7 +14,16 @@
 				<div class="contentseparador">
 					<form action="" method="POST">
 				        <h2>Ajustes de la cuenta</h2>
-				        <input type="checkbox" class="checkparental" name="parental" value="parental">
+
+				        <?php
+				        	//¿Tiene el control parental activado?
+				        	if ($controlparental){
+				        		$check = "checked"; //Ponemos el checkbox marcado
+				        	}else{
+				        		$check = "uncheked"; //Ponemos el checkbox desmarcado
+				        	}
+				        ?>
+				        <input type="checkbox" class="check" name="parental" value="parental" <?php echo $check ?>>
 				        Activar control parental
 				        <br/><br/>
 				        <p class="center"><input type="submit" class="boton" name="guardarajustes" value="Guardar cambios"></p><br/>
@@ -22,7 +31,11 @@
 
 					<?php
 				    	if (isset($_POST["guardarajustes"])){
-				    		if ($user->userChangeParental($UserName, $_POST["parental"])){
+				    		$checkparental = 0; //iniciamos la variable por defecto desactivada
+				    		if(isset($_POST['parental'])){ //Si el check de parental esta marcado...
+							    $checkparental = 1;
+							}
+				    		if ($user->userChangeParental($UserName, $checkparental)){
 				    			echo "Cambios guardados.";
 				    		}else{
 				    			echo "Error al guardar los cambios, intentalo mas tarde o ponte en contacto con un administrador.";

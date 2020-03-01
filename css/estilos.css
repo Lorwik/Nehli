@@ -50,6 +50,29 @@ body {
     margin: 3px;
 }
 
+.contentseparador{
+    border-style: solid;
+    width: 500px;
+    min-height: 100px;
+}
+
+.boton{
+    border: 1px solid #e40813;
+    height: 34px;
+    width: 316px;
+    background: #e40813;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.campotexto{
+    border: 1px solid #FFFFFF;
+    height: 30px;
+    width: 316px;
+    background: #1C1C1C;
+    color: #FFFFFF;
+    font-size: 20px;
+}
 
 .texto-encima {
     position: absolute;

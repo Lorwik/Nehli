@@ -42,6 +42,31 @@ class User extends DB{
         }
     }
 
+    //Funcion para cambiar la contraseña del usuario
+    public function userChangePass($user, $pass){
+        $md5pass = md5($pass);
+        $query = $this->connect()->prepare("UPDATE usuarios SET password = '$md5pass' WHERE username = '$user'");
+        $query->execute();
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Funcion para cambiar la configuracion de control parental
+    public function userChangeParental($user, $parent){
+        $query = $this->connect()->prepare("UPDATE usuarios SET parental = '$parent' WHERE username = '$user'");
+        $query->execute();
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function setUser($user){
         $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
         $query->execute(['user' => $user]);

@@ -19,7 +19,7 @@
 		$useradmin = $user->userAdmin($UserName);
 	?>
 
-	<title><?php echo $titulo; ?></title>
+	<title><?php echo $titulo.' - '.$pagina; ?></title>
 	<div class="menu-header">
 		<a href="home.php"><img src="img/logo.png" class="logo" width="150"></a>
 		<?php include('barramenu.php')?>

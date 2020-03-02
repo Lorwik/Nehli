@@ -11,7 +11,10 @@
 
 <html>
 	<head>
-		<?php include("header.php"); ?>
+		<?php
+			$pagina = " Reproductor";
+			include("header.php");
+		?>
 		<link href="css/video-js.css" rel="stylesheet" />
 		<link href="css/netflix-skin.css" rel="stylesheet" />
 		<!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->

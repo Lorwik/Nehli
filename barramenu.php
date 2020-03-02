@@ -6,7 +6,7 @@
 </ul>
 
 <ul id="menu-superiorright" class="menu-superior">
-	<li>Bienvenido <a href="userpanel.php"><?php echo $UserName; if($useradmin == true){echo " (Admin)";} ?></a></li>
+	<li>Bienvenido <a href="userpanel.php"><?php echo $UserName;?></a> <a href="adminpanel.php"><?php if($useradmin == true){echo " (Admin)";} ?></a></li>
 	<li><a href="includes/logout.php">Cerrar sesión</a></li>
 	<li><img class="avatar" src="img/avatar.png"></li>
 </ul>

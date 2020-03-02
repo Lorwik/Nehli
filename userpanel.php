@@ -13,7 +13,9 @@
 
 				<div class="contentseparador">
 					<form action="" method="POST">
-				        <h2>Ajustes de la cuenta</h2>
+				        <h2>Control Parental</h2>
+				        Email:<br/>
+				        <input type="email" name="email" class="campotexto" <?php echo 'value='.$user->getEmail();?> disabled><br/><br/>
 
 				        <?php
 				        	//¿Tiene el control parental activado?
@@ -26,11 +28,11 @@
 				        <input type="checkbox" class="check" name="parental" value="parental" <?php echo $check ?>>
 				        Activar control parental
 				        <br/><br/>
-				        <p class="center"><input type="submit" class="boton" name="guardarajustes" value="Guardar cambios"></p><br/>
+				        <p class="center"><input type="submit" class="boton" name="guardarparental" value="Guardar cambios"></p><br/>
 				    </form>
 
 					<?php
-				    	if (isset($_POST["guardarajustes"])){
+				    	if (isset($_POST["guardarparental"])){
 				    		$checkparental = 0; //iniciamos la variable por defecto desactivada
 				    		if(isset($_POST['parental'])){ //Si el check de parental esta marcado...
 							    $checkparental = 1;
@@ -43,7 +45,9 @@
 						}
 					?>
 				</div>
+
 				<br/>
+
 				<div class="contentseparador">
 					<form action="" method="POST">
 				        <h2>Cambiar contraseña</h2>

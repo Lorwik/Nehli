@@ -42,6 +42,18 @@ class User extends DB{
         }
     }
 
+    //Funcion que comprueba si el usuario es administrador
+    public function userAdmin($user){
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND admin = 1');
+        $query->execute(['user' => $user]);
+
+        if($query->rowCount()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //Funcion para cambiar la contraseña del usuario
     public function userChangePass($user, $pass){
         $md5pass = md5($pass);

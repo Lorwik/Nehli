@@ -16,6 +16,7 @@
 
 		$UserName = $user->getUserName();
 		$controlparental = $user->userParental($UserName);
+		$useradmin = $user->userAdmin($UserName);
 	?>
 
 	<title><?php echo $titulo; ?></title>

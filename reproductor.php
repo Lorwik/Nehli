@@ -40,7 +40,7 @@
 		<center>
 			<br/>
 			<!--Mostramos el titulo del video actual-->
-			<h2><?php echo $videos[$id] ?></h1>
+			<h2><?php echo substr($videos[$id],0,-4) ?></h1>
 			<br/>
 
 			<!--REPRODUCTOR DE VIDEO-->
@@ -49,6 +49,12 @@
 					//Comprobamos que tipo de extension es para configurar la fuente
 					TipoDeFuente($videos[$id], $source);
 					echo '<source src="'.$carpetas[$dir]."/".$videos[$id].'" type="'.$source.'" codecs="avc1.42E01E, mp4a.40.2"/>';
+
+					$subtitulos = Buscarsubtitulos($carpetas[$dir], $videos[$id]);
+					if ($subtitulos <> "NADA"){
+						echo '<track kind="captions" src="'.$carpetas[$dir]."/".$subtitulos.'" srclang="es" label="Español" default>';
+					}
+
 				?>
 				<p class="vjs-no-js">
 				  Para ver este video, habilite JavaScript y considere actualizar a un navegador web que

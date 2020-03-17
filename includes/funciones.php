@@ -112,4 +112,29 @@ function TipoDeFuente($file, &$source){
   }
 }
 
+//Metodo que recibe el directorio de una serie/pelicula
+//junto el archivo de video que se va a reproducir y
+//comprueba si existe un archivo de subtitulos con el mismo nombre
+//que el archivo de video.
+function Buscarsubtitulos($directorio, $video){
+  $resultado = "NADA";
+
+  //¿Hemos recibido la ruta de un directorio?
+  if (is_dir($directorio)) {
+    //Si es asi lo abrimos
+    if ($dh = opendir($directorio)) {
+      //Recorremos todos los archivos
+      while (($file = readdir($dh)) !== false) {
+        //¿El archivo actual es el archivo de subtitulos de ese video?
+        if (substr($file, -4) == ".srt"){
+          $resultado = substr($file, 0, -4).".srt";
+        }
+      }
+      closedir($dh);
+    }
+  }
+
+  return $resultado;
+}
+
 ?>

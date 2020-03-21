@@ -7,11 +7,19 @@ class User extends DB{
 
     //Funcion que comprueba si el usuario existe
     public function userExists($user, $pass){
-        $md5pass = md5($pass);
-        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND password = :pass');
-        $query->execute(['user' => $user, 'pass' => $md5pass]);
+        
+        $contado = 0;
 
-        if($query->rowCount()){
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user');
+        $query->execute(['user' => $user]);
+        
+        foreach ($query as $currentUser) {
+            if (password_verify($pass, $currentUser['lapass'])){
+                $contador++;
+            }
+        }
+
+        if($contador>0){
             return true;
         }else{
             return false;
@@ -20,7 +28,7 @@ class User extends DB{
 
     //Funcion que comprueba si el usuario fue confirmado para poder logear
     public function userConfirmado($user){
-        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND confirmado = 1');
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user AND confirmado = 1');
         $query->execute(['user' => $user]);
 
         if($query->rowCount()){
@@ -32,7 +40,7 @@ class User extends DB{
 
     //Funcion que comprueba si el usuario tiene activado el control parental
     public function userParental($user){
-        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND parental = 1');
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user AND parental = 1');
         $query->execute(['user' => $user]);
 
         if($query->rowCount()){
@@ -44,7 +52,7 @@ class User extends DB{
 
     //Funcion que comprueba si el usuario es administrador
     public function userAdmin($user){
-        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user AND admin = 1');
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user AND poderoso = 1');
         $query->execute(['user' => $user]);
 
         if($query->rowCount()){
@@ -56,9 +64,9 @@ class User extends DB{
 
     //Funcion para cambiar la contraseña del usuario
     public function userChangePass($user, $pass){
-        $md5pass = md5($pass);
-        $query = $this->connect()->prepare("UPDATE usuarios SET password = '$md5pass' WHERE username = '$user'");
-        $query->execute();
+        $hashpass = password_hash($pass, PASSWORD_DEFAULT);
+        $query = $this->connect()->prepare("UPDATE usuarios SET lapass = :hashpass WHERE nombresito = :user");
+        $query->execute(['hashpass' => $hashpass, 'user' => $user]);
 
         if($query->rowCount()){
             return true;
@@ -69,8 +77,8 @@ class User extends DB{
 
     //Funcion para cambiar la configuracion de control parental
     public function userChangeParental($user, $parent){
-        $query = $this->connect()->prepare("UPDATE usuarios SET parental = '$parent' WHERE username = '$user'");
-        $query->execute();
+        $query = $this->connect()->prepare('UPDATE usuarios SET parental = :parent WHERE nombresito = :user');
+        $query->execute(['parent' => $parent, 'user' => $user]);
 
         if($query->rowCount()){
             return true;
@@ -80,18 +88,18 @@ class User extends DB{
     }
 
     public function setUser($user){
-        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user');
         $query->execute(['user' => $user]);
         
         foreach ($query as $currentUser) {
-            $this->username = $currentUser['username'];
+            $this->nombresito = $currentUser['nombresito'];
             $this->email = $currentUser['email'];
         }
     }
 
     //Funcion que comprueba si existe el usuario solo con el nombre
     public function ExisteUsuario($user){
-        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE username = :user');
+        $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user');
         $query->execute(['user' => $user]);
 
         if($query->rowCount()){
@@ -115,8 +123,8 @@ class User extends DB{
 
     //Registramos un nuevo usuario
     public function createUser($user, $pass, $email){
-        $md5pass = md5($pass);
-        $query = $this->connect()->prepare("INSERT INTO usuarios (username, password, email) VALUES ('$user', '$md5pass', '$email')");
+        $hashpass = password_hash($pass, PASSWORD_DEFAULT);
+        $query = $this->connect()->prepare("INSERT INTO usuarios (nombresito, lapass, email) VALUES ('$user', '$hashpass', '$email')");
         $query->execute();
 
         if($query->rowCount()){
@@ -127,7 +135,7 @@ class User extends DB{
     }
 
     public function getUserName(){
-        return $this->username;
+        return $this->nombresito;
     }
 
     public function getEmail(){

@@ -13,11 +13,13 @@
 		<center>
 		<div class="loginregistro">
 		    <form action="" method="POST">
+		    	<!--Si ya intento logear pero hubo un error lo mostramos -->
 		        <?php
 		            if(isset($errorLogin)){
 		                echo $errorLogin;
 		            }
 		        ?>
+		        
 		        <h2>Iniciar sesión</h2>
 		        <p>Nombre de usuario: <br>
 		        <input type="text" name="username" class="txtlogin"></p>

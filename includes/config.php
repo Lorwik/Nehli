@@ -1,10 +1,4 @@
 <?php
-//Conexión SQL
-	$dbhost="localhost";
-	$dbuser="root";
-	$dbpass="";
-	$dbname="nehli";
-
 //Archivo de configuración.
 	$titulo="Nehli"; //constante con el titulo de la pagina
 	

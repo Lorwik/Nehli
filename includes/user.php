@@ -8,7 +8,7 @@ class User extends DB{
     //Funcion que comprueba si el usuario existe
     public function userExists($user, $pass){
         
-        $contado = 0;
+        $contador = 0;
 
         $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE nombresito = :user');
         $query->execute(['user' => $user]);

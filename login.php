@@ -4,12 +4,20 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/estilos-login.css">
 		<link rel="shortcut icon" href="nhicon.ico"/>
-		<?php include("includes/config.php")?>
+		<?php
+			include("includes/config.php");
+			include('index.php'); //Archivo de gestion de sesiones
+		?>
 		<title><?php echo $titulo; ?> - Login</title>
 	</head>
 	<body>
 		<a href="index.php"><img src="img/logo.png" class="logo" width="150"></a>
-
+		<?php
+			//¿Ya esta logeado?
+			if (isset($_SESSION['user'])) {
+				header("refresh:0; url=home.php");
+			}
+		?>
 		<center>
 		<div class="loginregistro">
 		    <form action="" method="POST">

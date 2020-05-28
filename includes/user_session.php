@@ -3,8 +3,8 @@
 class UserSession{
 
     public function __construct(){
-      $lifetime=600;
-      session_set_cookie_params($lifetime);
+        $lifetime=99999999;
+        session_set_cookie_params($lifetime);
         session_start();
     }
 

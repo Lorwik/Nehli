@@ -36,7 +36,7 @@
 								            echo "<img title='".$carpetas[$i]."' src='".$miniatura."' id=miniatura alt='".$carpetas[$i]."'></a> ";
 								            echo "<div class='tile__details' onclick='mostrar(".($x+1).$i.");'>";
 								            	echo "<div class='tile__title'>";
-								            		echo "<h2>".substr($carpetas[$i], 19, 40)."</h2>";
+								            		echo "<h2>".substr($carpetas[$i], 14, 40)."</h2>";
 								            	echo "</div>";
 								            echo "</div>";
 								        echo "</div>";

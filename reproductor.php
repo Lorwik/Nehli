@@ -17,8 +17,6 @@
 		?>
 		<link href="css/video-js.css" rel="stylesheet" />
 		<link href="css/netflix-skin.css" rel="stylesheet" />
-		<!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-		<script src="js/video.js"></script>
 
 		<?php
 			//Si esta intentando acceder directamente a una categoria protegida por control parental lo echamos
@@ -44,6 +42,7 @@
 			<br/>
 
 			<!--REPRODUCTOR DE VIDEO-->
+			<script src="js/video.js"></script>
 			<video id="my-video" class="video-js vjs-big-play-centered vjs-16-9" controls preload="auto" width="1280" heigh="768" poster="img/poster.png" codecs="theora, vorbis" data-setup='{}'>
 				<?php
 					//Comprobamos que tipo de extension es para configurar la fuente
@@ -63,13 +62,13 @@
 			</video>
 
 			<script>
-			  var player = videojs('my-video', { 
-			    html5: {
-			      hls: {
-			        overrideNative: true
-			      }
-			    }
-			  });
+			  	var player = videojs('my-video', { 
+			    	html5: {
+			      	hls: {
+			        	overrideNative: true
+			      	}
+			    	}
+			  	});
 			</script>
 
 			<!--SCRIPT PARA LOS ACCESOS RAPIDO DEL TECLADO EN EL REPRODUCTOR -->

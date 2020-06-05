@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/estilos-login.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 		<link rel="shortcut icon" href="nhicon.ico"/>
 		<?php include("includes/config.php");?>
 		<title><?php echo $titulo; ?> - Registro</title>
@@ -10,80 +12,48 @@
 	<body>
 		<a href="index.php"><img src="img/logo.png" class="logo" width="150"></a>
 
-		<center>
-		<div class="loginregistro">
-		    <form action="" method="POST">
-		        <h2>Registrar</h2>
-		        <p>Nombre de usuario: <br>
-		        <input type="text" name="username" class="txtlogin"></p>
-		        <p>Password: <br>
-		        <input type="password" name="password" class="txtlogin"></p>
-		        <p>Repetir Password: <br>
-		        <input type="password" name="repassword" class="txtlogin"></p>
-		        <p>Email: <br>
-		        <input type="email" name="email" class="txtlogin"></p>
-		        <p class="center"><input type="submit" class="btnlogin" value="Registrar"></p>
+		<div class="container">
+
+		    <form action="" method="POST" accept-charset="utf-8" class="form-horizontal" role="form">
+		       	<div class="titulo text-center">
+					<h1 class="regBoxTitle">Registro de Cuenta</h1>
+				</div>
+
+		        <div class="form-group">
+					<label for="username" class="col-sm-6 col-form-label">Nombre de usuario: </label>
+					<div class="col-sm">
+						<input type="text" name="username" class="form-control" autofocus>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="password" class="col-sm-2 col-form-label">Contrase&ntilde;a: </label>
+					<div class="col-sm">
+						<input type="password" name="password" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="repassword" class="col-sm-6 col-form-label">Repetir Contrase&ntilde;a: </label>
+					<div class="col-sm">
+						<input type="password" name="repassword" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email" class="col-sm-2 col-form-label">Email: </label>
+					<div class="col-sm">
+						<input type="email" name="email" class="form-control">
+					</div>
+				</div>
+
+				<br/>
+				<div class="text-center">
+		        	<p class="center"><input type="submit" class="btn btn-danger btn-lg" value="Registrar"></p>
+		        </div>
+
+		        <?php require("includes/process/register.php"); ?>
 		    </form>
-
-			<?php
-    			if (isset($_POST["username"])){
-					$userForm = $_POST['username'];
-					$passForm = $_POST['password'];
-					$repassForm = $_POST['repassword'];
-					$emailForm = $_POST['email'];
-
-					//Iniciamos la bandera error
-					$error = false;
-
-					//¿Se dejo algun campo vacio?
-					if (($userForm == "") || ($passForm == "") || ($emailForm == "")){
-						$errormsg = "¡Debes rellenar todos los campos!";
-						$error = true;
-					}
-
-					//¿Coinciden las contraseñas?
-					if ($passForm <> $repassForm){
-						$errormsg = "Las contraseñas no coinciden";
-						$error = true;
-					}
-
-					//¿Las contraseñas cumplen un minimo de caracteres?
-					if ((strlen($passForm) < 6) || (strlen($passForm) > 20)){
-						$errormsg = "La contraseña debe tener entre 6 a 20 caracteres.";
-						$error = true;
-					}
-
-					include("includes/user.php");
-					$user = new user();
-					//¿El usuario ya existe?
-					if ($user->ExisteUsuario($userForm) == true){
-						$errormsg = "Ya hay un usuario registrado con ese nombre.";
-						$error = true;
-					}
-
-					//¿El usuario ya fue registrado?
-					if ($user->ExisteEmail($emailForm) == true){
-						$errormsg = "Ya hay una cuenta con ese email registrado.";
-						$error = true;
-					}
-
-					//¿Se produjo algun error?
-					if ($error == false){
-						//Si llegamos aqui, creamos el usuario
-						if ($user->createUser($userForm, $passForm, $emailForm)){
-							echo "¡Registro completado! Redireccionando en 3...";
-							header("refresh:3; url=index.php");
-						}else{
-							echo "Error al registrar la cuenta, intentalo mas tarde o ponte en contacto con un administrador.";
-						}
-					}else{ //Si se produjeron, mostamos cuales fueron.
-						echo $errormsg;
-						$error = false;
-					}
-				}
-			?>
-
 	    </div>
-	    </center>
 	</body>
 </html>

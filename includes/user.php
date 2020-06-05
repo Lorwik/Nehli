@@ -128,6 +128,10 @@ class User extends DB{
         $query->execute();
 
         if($query->rowCount()){
+            echo '<div class="alert alert-success" role="alert">';
+            echo "¡Enhorabuena! hemos registrado tu cuenta, seras redirigido en 3 segundos.";
+            echo '</div>';
+            header("refresh:3; url=index.php");
             return true;
         }else{
             return false;

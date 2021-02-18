@@ -43,7 +43,7 @@
         }
       }
     }else
-      echo "<br>La ruta valida no es valida.";
+      echo "<br>La ruta no es valida.";
   }
 
 //Funcion para obtener la lista de videos de un directorio
